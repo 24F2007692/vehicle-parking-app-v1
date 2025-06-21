@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp Page</title>
+    <link rel="stylesheet" href="../static/css/signup.css">
+</head>
+
+<body>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert" role="alert">
+        {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div id="signup">
+        <h1>User Signup</h1>
+        <div class="signup-div">
+            <form method="post">
+                <label for="mail">Email id(Username): </label>
+                <input class="input" type="email" id="mail" name="mail" required>
+                <br>
+                <label for="pass">Password: </label>
+                <input class="input" type="password" id="pass" name="pass" required>
+                <br>
+                <label for="name">Fullname: </label>
+                <input class="input" type="text" id="name" name="name" required>
+                <br>
+                <label for="address">Address: </label>
+                <textarea class="input" name="address" id="address" name="address" required></textarea>
+                <br>
+                <label for="pincode">Pincode: </label>
+                <input class="input" type="number" id="pincode" name="pincode" required>
+                <br>
+                <input class="button" type="submit" value="register">
+                <br>
+                <p class="login">Already on SmartParkr?<a style="text-decoration: none;color: black; font-weight: bold;" href="/login">Login</a></p>
+        </div>
+        </form>
+    </div>
+</body>
+
+</html>

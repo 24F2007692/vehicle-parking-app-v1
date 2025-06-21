@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/admin.css">
+    <link rel="stylesheet" href="../static/css/admin_search.css">
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    {% include 'admin_navbar.html' %}
+    {% block content %}{% endblock %}
+    <form method="POST" action="{{ url_for('search')}}">
+        <label for="search_by"></label>
+        <div class="search-container">
+            <select name="search_by" id="search_by" class="search-select">
+                <option value="" disabled selected>Search by</option>
+                <option value="location">Location Name</option>
+                <option value="pincode">pincode</option>
+                <option value="price_range">Price Range(e.g., 20–50)</option>
+            </select>
+            <label for="search_string"></label>
+            <input type="text" name="search_string" id="search_string" placeholder="Type to search..."
+                class="search-input">
+
+            <input type="submit" value="Search" class="search-button">
+
+            <form action="{{ url_for('search') }}" method="get" style="display:inline;">
+                <button type="submit" class="clear-button">Clear Search</button>
+            </form>
+        </div>
+    </form>
+
+    {{ message | safe }}
+    {% if location and lots %}
+    <h1>Parking Lots at {{ location }}</h1>
+    <div class="parkinglots">
+        {% for lot in lots %}
+        <div class="lot">
+            <p>#{{lot.id}}</p>
+            <p>#{{lot.prime_location_name}}</p>
+            <p>(Occupied: {{ lot.available_lots }} / {{lot.max_spots}})</p>
+            <!-- url to edit lot -->
+            <div class="lot-actions">
+                <a href="{{ url_for('edit_lot',lot_id=lot.id) }}">edit</a>
+                <a href="{{ url_for('del_lot',lot_id=lot.id) }}">delete</a>
+            </div>
+
+            <div class="spots">
+                {% for spot in spots %}
+                {% if lot.id == spot.lot_id %}
+
+                <div class="spot">
+                    <a class="{{'spot-avl' if spot.status=='A' else 'spot-occ'}}"
+                        href="{{ url_for('view_spot',spot_id=spot.id) }}">{{ spot.status }}</a>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% endif %}
+
+</body>
+
+</html>

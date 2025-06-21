@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login page</title>
+    <link rel="stylesheet" href="../static/css/login.css">
+</head>
+
+<body>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert" role="alert">
+        {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+
+    <div id="login">
+        <h1>Login</h1>
+        <div class="login-div">
+            <form method="post">
+                <label for="mail">Registered Email id: </label>
+                <input class="input" type="email" id="mail" name="mail" required>
+                <br>
+                <label for="pass">Password: </label>
+                <input class="input" type="password" id="pass" name="pass" required>
+                <br>
+
+                <input class="button" type="submit" value="Login">
+                <br>
+                <p class="signup">Don't have an account?<a style="text-decoration: none;color: black; font-weight: bold;" href="/signup">Register</a></p>
+
+        </div>
+        </form>
+    </div>
+    </div>
+</body>
+
+</html>
