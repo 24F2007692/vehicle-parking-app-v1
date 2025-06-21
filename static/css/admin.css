@@ -1,0 +1,116 @@
+body {
+  background-color: #18a73652;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+}
+
+.parkinglots {
+  color: #008000;
+  margin: 45px;
+  display: flex;
+  gap: 30px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  font-weight: 700;
+}
+
+/* a {
+  color: white;
+} */
+
+.spot > a {
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  padding: 1px 4px;
+}
+
+.spot {
+  display: inline-block;
+}
+
+.lot {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: rgb(255 255 255 / 33%);
+  padding: 13px;
+  border: 1px solid #007f003d;
+  overflow: auto;
+  scrollbar-width: none;
+  border-radius: 23px;
+  gap: 2px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #008000;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: -8px;
+  font-size: 44px;
+  padding: 13px;
+  border: 2px solid #42a142;
+}
+
+.lot-actions > a {
+  background-color: #000000;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 4px;
+  font-weight: 600;
+  border-radius: 7px;
+  border: 1px solid #cec8c8;
+}
+
+.lot-actions {
+  margin: 3px;
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+}
+
+.addlot {
+  color: #006d00;
+  background: #00ff00;
+  padding: 8px;
+  font-size: 29px;
+  position: fixed;
+  bottom: 18px;
+  z-index: 1000;
+  right: 25px;
+  text-decoration: none;
+  font-weight: 900;
+  border-radius: 15px;
+  border: 1px solid #29c25654;
+  background: rgb(253 255 253 / 33%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.spot-avl {
+  background-color: green;
+  color: white;
+}
+.spot-occ {
+  background-color: red;
+  color: white;
+}
+
+.spots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 1px;
+  justify-content: flex-start;
+  flex-direction: row;
+}

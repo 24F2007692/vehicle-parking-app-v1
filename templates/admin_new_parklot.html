@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle parking App - Edit Parking Lot</title>
+    <link rel="stylesheet" href="../static/css/admin_edit_parklot.css">
+</head>
+
+<body>
+    <div id="addlot">
+        <h1>{{ 'Edit Parking Lot' if lot else 'New Parking Lot' }}</h1>
+        <div class="form">
+            <form method="post">
+                <label for="location">Prime Location Name: </label>
+                <input class="input" type="text" id="location" name="location" value="{{ lot.prime_location_name if lot else '' }}"
+                    required>
+                <br>
+                <label for="address">Address: </label>
+                <textarea class="input" name="address" id="address" name="address"
+                    required>{{ lot.address if lot else '' }}</textarea>
+                <br>
+                <label for="pincode">Pincode: </label>
+                <input class="input" type="number" id="pincode" name="pincode" value="{{ lot.pincode if lot else '' }}" required>
+                <br>
+                <label for="price">Price(Per hour): </label>
+                <input class="input" type="number" id="price" name="price" value="{{ lot.price_per_hr if lot else '' }}" required>
+                <br>
+                <label for="max_spots">Maximum Spots: </label>
+                <input class="input" type="number" id="max_spots" name="max_spots" value="{{ lot.max_spots if lot else '' }}"
+                    required>
+                <br>
+                <br>
+
+                <div class="buttons">
+                    <input class="button" type="submit" value="{{ 'Update' if lot else 'Add' }}">
+                    <a class="button" href="/dashboard">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

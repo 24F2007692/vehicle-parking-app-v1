@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/admin_view_spot.css">
+</head>
+
+<body>
+    <div id="view">
+        <h1>View/Delete parking Spot</h1>
+        <div class="form">
+            <form action="{{ url_for('del_spot',spot_id=spot_id) }}" method="post">
+                <label for="spot_id">ID </label>
+                <input class="input" type="number" id="spot_id" name="spot_id" value="{{ spot_id if spot_id else '' }}"
+                    required readonly>
+                <br>
+                <label for="status">Status: </label>
+                {% if status == 'O'%}
+                <a id="status" class='spot spot-occ' href="{{ url_for('O_spot',spot_id=spot_id) }}">O</a>
+                {% else %}
+                <!-- <input class="input" type="text" id="status" name="status" value="{{ status if status else '' }}"
+                    required readonly> -->
+                <a id="status" class='spot spot-avl' href="{{ url_for('O_spot',spot_id=spot_id) }}">A</a>
+
+                {% endif %}
+
+                <div class="buttons">
+                    <input class="button" type="submit" value="Delete">
+                    <a class="button" href="/dashboard">Close</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
