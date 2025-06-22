@@ -7,10 +7,11 @@ from datetime import datetime, timezone
 
 @app.route('/')
 def index():
-    if 'user_id' not in session:
-        flash('Please login to Continue')
-        return redirect(url_for('login'))
-    return render_template("index.html", user=User.query.get(session['user_id']))
+    # if 'user_id' not in session:
+    #     flash('Please login to Continue')
+    #     return redirect(url_for('login'))
+    # user=User.query.get(session['user_id'])
+    return render_template("index.html", )
 
 
 @app.route('/signup')
@@ -30,10 +31,6 @@ def dashboard():
         return redirect(url_for('login'))
 
     user = User.query.get(session['user_id'])
-    if not user:
-        session.pop('user_id', None)
-        flash("User not found. Please login again.")
-        return redirect(url_for('login'))
 
     if user.role == 'admin':
         lots = ParkingLot.query.all()
@@ -351,12 +348,88 @@ def del_spot(spot_id):
     flash("Spot deleted successfully")
     return redirect(url_for('dashboard'))
 
+# USER KI ROUTES
+
+# Lot search
+@app.route("/search_lot", methods=['POST'])
+def search_lot():
+    if 'user_id' not in session:
+        flash('Please login to Continue')
+        return redirect(url_for('login'))
+    location = request.form.get('location')
+    if location:
+        return redirect(url_for('dashboard', location=location))
+    return redirect(url_for('dashboard'))
+
+
+# book parking spot in a lot
+@app.route("/book_spot/<int:lot_id>", methods=['GET', 'POST'])
+def book_spot(lot_id):
+    if 'user_id' not in session:
+        flash('Please login to Continue')
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        veh_no = request.form.get('veh_no')
+        spot_id = request.form.get('spot_id')
+        spot = ParkingSpot.query.get(spot_id)
+
+        if spot and spot.status == 'A':
+            spot.status = 'O'
+            booking = Reservation(
+                spot_id=spot.id, user_id=session['user_id'], vehicle_num=veh_no)
+            db.session.add(booking)
+            db.session.commit()
+            return redirect(url_for('dashboard'))
+        else:
+            flash('Spot is no longer available')
+            return redirect(url_for('dashboard'))
+
+    spot = ParkingSpot.query.filter_by(lot_id=lot_id, status='A').first()
+    if spot:
+        return render_template("user_booking.html", spot_id=spot.id, user_id=session['user_id'], lot_id=lot_id)
+    else:
+        flash("No available spots in this lot.")
+        return redirect(url_for('dashboard'))
+
+
+#Release a spot
+@app.route("/release/<int:res_id>", methods=['GET', 'POST'])
+def release(res_id):
+    if 'user_id' not in session:
+        flash('Please login to Continue')
+        return redirect(url_for('login'))
+
+    res = Reservation.query.get(res_id)
+    if not res:
+        flash("Reservation not found")
+        return redirect(url_for('dashboard'))
+
+    spot = ParkingSpot.query.get(res.spot_id)
+    lot = ParkingLot.query.get(spot.lot_id)
+
+    if request.method == 'POST':
+        res.Leaving_timestamp = datetime.now(timezone.utc)
+        spot.status = 'A'
+        res.parking_cost = request.form.get("total_cost")
+        db.session.commit()
+        flash("Spot released successfully")
+        return redirect(url_for('dashboard'))
+
+    booking_time = res.booking_time.replace(tzinfo=timezone.utc)
+    release_time = datetime.now(timezone.utc)
+
+    duration = (release_time - booking_time).total_seconds() / 3600
+    duration = max(duration, 0.01)
+    price_per_hr = float(lot.price_per_hr)
+    total_cost = round(duration * price_per_hr, 2)
+
+    return render_template("user_release.html", res=res, date_time=release_time, total_cost=total_cost)
+
+
 
 # Logout and remove session
 @app.route('/logout')
 def logout():
     session.pop('user_id', None)
     return redirect(url_for('login'))
-
-
-

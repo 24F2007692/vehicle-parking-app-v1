@@ -13,7 +13,7 @@
         }
 
         nav>p {
-            font-size: 24px;
+            font-size: 31px;
             font-family: fantasy;
         }
 
@@ -24,7 +24,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 30px;
+            padding: 17px 28px;
             background: rgba(0, 0, 0, 0.4);
             color: white;
             backdrop-filter: blur(10px);
@@ -33,29 +33,41 @@
 
         .center-nav {
             display: flex;
-            gap: 20px;
+            gap: 23px;
+            margin-right: 100px;
         }
 
         li {
             list-style: none;
         }
 
-        a {
-            color: black;
+        nav>ul>li>a {
+            font-size: 23px;
+            color: white;
             text-decoration: none;
+        }
+
+        .profile {
+            display: flex;
+            flex-direction: column-reverse;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
 
 <body>
     <nav>
-        <p>Welcome to User</p>
+        <p>SmartParkr</p>
         <ul class="center-nav">
-            <li><a href="/">home</a></li> |
-            <li><a href="">Summary</a></li> |
+            <li><a href="/dashboard">Home</a></li>
+            <li><a href="">Summary</a></li>
             <li><a href="/logout">Logout</a></li>
         </ul>
-        <a href="">EditProfile</a>
+        <div class="profile">
+            <a style="color: white; text-decoration: none;" href="#">EditProfile</a>
+            <img style="width: 23px;" src="../static/images/no-profile-picture-15257.png" alt="">
+        </div>
     </nav>
 </body>
 

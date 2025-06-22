@@ -21,8 +21,6 @@
                 {% if status == 'O'%}
                 <a id="status" class='spot spot-occ' href="{{ url_for('O_spot',spot_id=spot_id) }}">O</a>
                 {% else %}
-                <!-- <input class="input" type="text" id="status" name="status" value="{{ status if status else '' }}"
-                    required readonly> -->
                 <a id="status" class='spot spot-avl' href="{{ url_for('O_spot',spot_id=spot_id) }}">A</a>
 
                 {% endif %}

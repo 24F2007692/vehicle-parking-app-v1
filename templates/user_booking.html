@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/user_booking.css">
+</head>
+
+<body>
+    <div id="spot_book">
+        <h1>Book The Parking spot</h1>
+        <div class="form">
+            <form action="{{ url_for('book_spot',lot_id=lot_id) }}" method="post">
+                <label for="spot_id">Spot ID: </label>
+                <input class="input" type="text" value="{{ spot_id }}" id="spot_id" name="spot_id" readonly>
+                <br>
+                <label for="lot_id">Lot ID: </label>
+                <input class="input" type="text" value="{{ lot_id }}" id="lot_id" name="lot_id" readonly>
+                <br>
+                <label for="user_id">User ID: </label>
+                <input class="input" type="text" value="{{ user_id }}" id="user_id" name="user_id" readonly>
+                <br>
+                <label for="veh_no">Vehicle Number: </label>
+                <input class="input" type="text" id="veh_no" name="veh_no">
+                <br>
+                <div class="buttons">
+                    <input class="button" type="submit" value="Reserve">
+                    <a class="button" href="{{ url_for('dashboard') }}">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

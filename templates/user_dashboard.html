@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../static/css/user_dashboard.css">
 </head>
 
 <body>
@@ -12,63 +13,75 @@
     {% block content %}{% endblock %}
 
     {% if history %}
-    <div class="history">
-        <h1>Recent parking history</h1>
-       
-        <table border="1">
-            <tr>
-                <th>ID</th>
-                <th>Location</th>
-                <th>Vehicle No</th>
-                <th>Parking time-stamp</th>
-                <th>Action</th>
-            </tr>
-             {% for reservations in history %}
-            <tr>
-                <td>{{ reservations[0] }}</td>
-                <td>{{ reservations[1] }}</td>
-                <td>{{ reservations[2] }}</td>
-                <td>{{ reservations[3].strftime('%Y-%m-%d %I:%M %p') }}</td>
-                {% if not reservations[4] %}
-                <td><a href="{{ url_for('release',res_id=reservations[0]) }}">release</a></td>
-                {% else %}
-                <td><button>Parked out</button></td>
-                {% endif %}
-            </tr>
-            {% endfor %}
+    <h1>Recent parking history</h1>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+
+                    <th>ID</th>
+                    <th>Location</th>
+                    <th>Vehicle No</th>
+                    <th>Parking time-stamp</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for reservations in history %}
+                <tr>
+                    <td>{{ reservations[0] }}</td>
+                    <td>{{ reservations[1] }}</td>
+                    <td>{{ reservations[2] }}</td>
+                    <td>{{ reservations[3].strftime('%Y-%m-%d %I:%M %p') }}</td>
+                    {% if not reservations[4] %}
+                    <td><a class="clear-button" href="{{ url_for('release',res_id=reservations[0]) }}">release</a></td>
+                    {% else %}
+                    <td><button class="search-button">Parked out</button></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
     </div>
     {% endif %}
     <hr>
     <form action="{{ url_for('search_lot') }}" method="post">
-        <label for="location">Search parking Location/Pincode: </label>
-        <input type="text" id="location" name="location" required>
-        <input type="submit" value="Submit">
+        <div class="search-container">
+            <label for="location">Search parking Location/Pincode: </label>
+            <input class="search-input" type="text" id="location" name="location" required>
+            <input class="search-button" type="submit" value="Submit">
     </form>
     {% if location %}
     <form action="{{ url_for('dashboard') }}" method="get" style="display:inline;">
-        <button type="submit">Clear Search</button>
+        <button class="clear-button" type="submit">Clear Search</button>
     </form>
     {% endif %}
+    </div>
+
 
     {% if location %}
     {% if lots %}
-    <div class="lots">
-        <table border="1">
-            <tr>
-                <th>ID</th>
-                <th>Address</th>
-                <th>Availability</th>
-                <th>Action</th>
-            </tr>
-            {% for lot in lots %}
-            <tr>
-                <td>{{ lot.id }}</td>
-                <td>{{ lot.address }}</td>
-                <td>{{ lot.available_lots }}</td>
-                <td><a href="{{ url_for('book_spot',lot_id=lot.id,) }}">BOOK</a></td>
-            </tr>
-            {% endfor %}
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Address</th>
+                    <th>Availability</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for lot in lots %}
+                <tr>
+                    <td>{{ lot.id }}</td>
+                    <td>{{ lot.address }}</td>
+                    <td>{{ lot.available_lots }}</td>
+                    <td><a class="search-button" href="{{ url_for('book_spot',lot_id=lot.id,) }}">BOOK</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
     </div>
     {% else %}

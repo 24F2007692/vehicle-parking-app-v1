@@ -1,0 +1,118 @@
+body {
+  background-color: #18a73652;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+}
+
+h1,h3 {
+  color: #008000;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: -8px;
+  font-size: 30px;
+  padding: 13px;
+  border: 2px solid #42a142;
+}
+
+/* user search */
+
+.search-container {
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  margin: 20px auto;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  padding: 10px 15px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.3);
+  color: #000;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgb(63 126 77 / 20%);
+}
+
+.search-button,
+.clear-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  background-color: #28a745;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  text-decoration: none;
+}
+
+.clear-button {
+  background-color: #dc3545;
+}
+
+.search-button:hover {
+  background-color: #218838;
+}
+
+.clear-button:hover {
+  background-color: #c82333;
+}
+
+
+
+
+/* fetched lots in table */
+
+.table-container {
+  display: flex;
+  background: rgb(253 255 253 / 33%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 67%;
+  overflow-x: auto;
+  margin: 38px auto;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+thead {
+  background-color: #38a169;
+  color: white;
+}
+
+th,
+td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+th {
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}

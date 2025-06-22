@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/user_release.css">
+</head>
+
+<body>
+    <div id="release_spot">
+        <h1>Release The Parking spot</h1>
+        <div class="form">
+            <form method="POST" action="{{ url_for('release', res_id=res.id) }}">
+                <label for="spot_id">Spot ID: </label>
+                <input class="input" type="text" value="{{ res.spot_id }}" id="spot_id" name="spot_id" readonly>
+                <br>
+                <label for="veh_no">Vehicle Number: </label>
+                <input class="input" type="text" id="veh_no" name="veh_no" value="{{ res.vehicle_num }} " readonly>
+                <br>
+                <label for="park_time">Parking time: </label>
+                <input class="input" type="datetime-local" value="{{ res.booking_time.strftime('%Y-%m-%dT%H:%M') }}" readonly>
+                <br>
+                <label for="release_time">Release time: </label>
+                <input class="input" type="datetime-local" value="{{ date_time.strftime('%Y-%m-%dT%H:%M') }}" id="release_time"
+                    name="release_time" readonly>
+                <br>
+                <label for="total_cost">Total Cost: </label>
+                <input class="input" type="number" value="{{ total_cost }}" id="total_cost" name="total_cost" readonly>
+                <br>
+                <div class="buttons">
+                    <input class="button" type="submit" value="Release">
+                    <a class="button" href="{{ url_for('dashboard') }}">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
