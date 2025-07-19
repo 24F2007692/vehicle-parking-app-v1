@@ -68,19 +68,34 @@ SmartParkr is a multi-user web application for managing 4-wheeler parking lots, 
 ## Project Structure
 
 ```
-parking_app_24F2007692/
-├── app.py                # Main Flask app
-├── config.py             # Configuration
-├── requirements.txt      # Python dependencies
-├── models/
-│   └── models.py         # SQLAlchemy models
-├── controllers/          # All route handlers
-├── templates/            # HTML templates (Jinja2)
-├── static/
-│   ├── css/              # Stylesheets
-│   ├── js/               # JavaScript (alert, etc.)
-│   └── images/           # Charts and assets
-└── routes.py             # (Legacy) Combined routes
+The project is organized into a modular structure to keep the code clean and maintainable.
+/parking_app
+|
+|-- app.py                  # Main Flask application file, initializes the app and extensions.
+|-- config.py               # Configuration settings for the application.
+|-- models/
+|   |-- models.py           # Defines the database schema (User, ParkingLot, etc.).
+|
+|-- controllers/
+|   |-- admin_*.py          # Route handlers for all admin functionalities.
+|   |-- user_*.py           # Route handlers for all user functionalities.
+|   |-- login.py, etc.      # Handlers for auth, dashboard, and other general routes.
+|
+|-- templates/
+|   |-- admin_*.html        # HTML templates for the admin interface.
+|   |-- user_*.html         # HTML templates for the user interface.
+|   |-- login.html, etc.    # General HTML templates.
+|
+|-- static/
+|   |-- css/                # CSS stylesheets.
+|   |-- js/                 # JavaScript files.
+|   |-- images/             # Static images and generated charts.
+|
+|-- instance/
+|   |-- db.sqlite3          # The SQLite database file.
+|
+|-- requirements.txt        # Lists all Python dependencies.
+|-- README.md               # This file.
 ```
 
 ## Customization
