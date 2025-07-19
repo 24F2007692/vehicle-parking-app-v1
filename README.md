@@ -1,42 +1,96 @@
-🚗 Smart Parking Management SystemA comprehensive web application built with Flask for managing parking lots. This system provides a seamless experience for both users looking for a parking spot and administrators managing the facilities. It features separate dashboards for users and admins, each tailored with specific functionalities.✨ FeaturesFor Users 🙋‍♂️Authentication: Secure user registration and login system.Profile Management: Users can view and update their personal information.Search Functionality: Easily search for available parking lots by location, address, or pincode.Real-Time Booking: Book an available parking spot in a chosen lot.Spot Release: Release a booked spot, with automatic calculation of parking duration and cost.Personal Dashboard: View current active bookings and a complete history of past reservations.Usage Summary: A personalized summary page with visualizations showing booking statistics, total amount spent, and average parking duration.For Admins 👨‍💼Admin Dashboard: An overview of all parking lots, their status, and the number of occupied spots.Lot Management: Admins can add, edit, or delete entire parking lots.Spot Management: View the status of every spot within a lot (Available/Occupied).User Management: View a list of all registered users and their details.Detailed Search: Advanced search for lots based on location, pincode, or price range.Occupancy Details: Get detailed information for any occupied spot, including the user who booked it and the total cost incurred so far.System Summary: A comprehensive summary page with key metrics like total users, monthly revenue, and overall spot occupancy, complete with graphical charts.🛠️ Tech StackBackend: Python, FlaskDatabase: Flask-SQLAlchemy (with SQLite as the database engine)Frontend: HTML, CSS, JavaScriptData Visualization: Matplotlib (for generating summary charts)Server: Werkzeug (Flask's development server)📂 Project StructureThe project is organized into a modular structure to keep the code clean and maintainable./parking_app
-|
-|-- app.py                  # Main Flask application file, initializes the app and extensions.
-|-- config.py               # Configuration settings for the application.
-|-- models/
-|   |-- models.py           # Defines the database schema (User, ParkingLot, etc.).
-|
-|-- controllers/
-|   |-- admin_*.py          # Route handlers for all admin functionalities.
-|   |-- user_*.py           # Route handlers for all user functionalities.
-|   |-- login.py, etc.      # Handlers for auth, dashboard, and other general routes.
-|
-|-- templates/
-|   |-- admin_*.html        # HTML templates for the admin interface.
-|   |-- user_*.html         # HTML templates for the user interface.
-|   |-- login.html, etc.    # General HTML templates.
-|
-|-- static/
-|   |-- css/                # CSS stylesheets.
-|   |-- js/                 # JavaScript files.
-|   |-- images/             # Static images and generated charts.
-|
-|-- instance/
-|   |-- db.sqlite3          # The SQLite database file.
-|
-|-- requirements.txt        # Lists all Python dependencies.
-|-- README.md               # This file.
-🚀 Setup and InstallationFollow these steps to get the project running on your local machine.1. Clone the Repositorygit clone <your-repository-url>
-cd parking_app_24F2007692
-2. Create and Activate a Virtual EnvironmentIt's highly recommended to use a virtual environment to manage project dependencies.On macOS/Linux:python3 -m venv venv
-source venv/bin/activate
-On Windows:python -m venv venv
-.\venv\Scripts\activate
-3. Install DependenciesCreate a requirements.txt file with the following content:Flask
-Flask-SQLAlchemy
-matplotlib
-Then, install all the necessary packages using pip:pip install -r requirements.txt
-4. Configure the Flask AppThe application needs to know which file to run. Set the FLASK_APP environment variable.On macOS/Linux:export FLASK_APP=app.py
-On Windows (Command Prompt):set FLASK_APP=app.py
-On Windows (PowerShell):$env:FLASK_APP="app.py"
-5. Run the ApplicationNow, you can start the Flask development server:flask run
-The application will be running at http://127.0.0.1:5000. Open this URL in your web browser to use the app.📖 UsageAdmin Account: To access the admin panel, you may need to manually change a user's role to admin in the db.sqlite3 database file.User Account: Simply sign up as a new user to access the user dashboard and features.This README was generated with assistance from Google's Gemini.
+# SmartParkr: Vehicle Parking Management App
+
+SmartParkr is a multi-user web application for managing 4-wheeler parking lots, spots, and reservations. It supports both admin and regular user roles, providing dashboards, statistics, and a smooth booking experience.
+
+## Features
+
+### For Users
+- **Signup/Login/Logout**: Secure authentication and session management.
+- **Search Parking Lots**: Find lots by location or pincode.
+- **Book a Spot**: Reserve available spots in any lot.
+- **Release a Spot**: End your reservation and calculate cost based on duration.
+- **View Booking History**: See all past and active reservations.
+- **Profile Management**: Edit your name, address, pincode, and password.
+- **Personal Statistics**: Visualize your parking durations and spending.
+
+### For Admins
+- **Dashboard Overview**: View all lots, spots, and their statuses.
+- **Add/Edit/Delete Lots**: Manage parking lots and their capacities.
+- **View All Users**: List and review registered users.
+- **Search Lots/Spots**: Filter by location, pincode, or price range.
+- **Spot Management**: View details of any spot, including occupancy and cost.
+- **Statistics & Revenue**: See monthly revenue, spot utilization, and user stats with charts.
+
+## Data Model Overview
+- **User**: email, password (hashed), name, address, pincode, role (admin/user)
+- **ParkingLot**: location name, address, pincode, price per hour, max spots
+- **ParkingSpot**: spot number, lot reference, status (Available/Occupied)
+- **Reservation**: user, spot, vehicle number, booking time, leaving time, cost
+
+## Visualizations
+- **Pie Charts**: Show active vs. completed bookings, and spot availability.
+- **Bar/Line Charts**: Show parking duration distribution and monthly revenue (admin).
+- Charts are auto-generated and saved in `static/images/`.
+
+## Setup & Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repo-url>
+   cd parking_app_24F2007692
+   ```
+2. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. **Run the app**
+   ```bash
+   python app.py
+   ```
+   The app uses SQLite by default (`db.sqlite3`).
+
+4. **Configuration**
+   - Edit `config.py` for DB URI or secret key if needed.
+   - Environment variables: `SECRET_KEY`, `TRACK_MODIFICATIONS` (optional).
+
+5. **Access**
+   - Open [http://localhost:5000](http://localhost:5000) in your browser.
+   - Default admin: `admin@gmail.com` / `admin` (created automatically if not present).
+
+## Usage
+
+- **Signup**: Register as a new user.
+- **Login**: Use your credentials to access the dashboard.
+- **Admin**: Log in with the admin account for management features.
+- **Book/Release**: Users can book and release spots from their dashboard.
+- **Edit Profile**: Update your details and password securely.
+
+## Project Structure
+
+```
+parking_app_24F2007692/
+├── app.py                # Main Flask app
+├── config.py             # Configuration
+├── requirements.txt      # Python dependencies
+├── models/
+│   └── models.py         # SQLAlchemy models
+├── controllers/          # All route handlers
+├── templates/            # HTML templates (Jinja2)
+├── static/
+│   ├── css/              # Stylesheets
+│   ├── js/               # JavaScript (alert, etc.)
+│   └── images/           # Charts and assets
+└── routes.py             # (Legacy) Combined routes
+```
+
+## Customization
+- **Styling**: Edit files in `static/css/` for custom look and feel.
+- **Templates**: Modify HTML in `templates/` for UI changes.
+- **Charts**: Generated with Matplotlib, saved in `static/images/`.
+
+## License
+Add your license here.
+
+---
+
+**For any issues or contributions, please open an issue or pull request.**
