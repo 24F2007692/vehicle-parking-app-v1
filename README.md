@@ -36,7 +36,7 @@ SmartParkr is a multi-user web application for managing 4-wheeler parking lots, 
 
 1. **Clone the repository**
    ```bash
-   git clone <repo-url>
+   git clone [<repo-url>](https://github.com/24F2007692/vehicle-parking-app-v1)
    cd parking_app_24F2007692
    ```
 2. **Install dependencies**
