@@ -4,11 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vehicle parking App - Edit Parking Lot</title>
-    <link rel="stylesheet" href="../static/css/admin_edit_parklot.css">
+    <title>SmartParkr - Add or Edit Parking Lot</title>
+    <link rel="stylesheet" href="../static/css/admin_new_or_edit_parklot.css">
 </head>
 
 <body>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    
     <div id="addlot">
         <h1>{{ 'Edit Parking Lot' if lot else 'New Parking Lot' }}</h1>
         <div class="form">
@@ -40,6 +49,7 @@
             </form>
         </div>
     </div>
+    <script src="../static/js/alert.js"></script>
 </body>
 
 </html>

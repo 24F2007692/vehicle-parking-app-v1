@@ -4,34 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SmartParkr - View Parking Spot</title>
     <link rel="stylesheet" href="../static/css/admin_view_spot.css">
 </head>
 
 <body>
     <div id="view">
-        <h1>View/Delete parking Spot</h1>
+        <h1>View Parking Spot</h1>
         <div class="form">
-            <form action="{{ url_for('del_spot',spot_id=spot_id) }}" method="post">
-                <label for="spot_id">ID </label>
-                <input class="input" type="number" id="spot_id" name="spot_id" value="{{ spot_id if spot_id else '' }}"
+            <form>
+                <label for="spot_id">Spot No: </label>
+                <input class="input" type="number" id="spot_id" name="spot_id" value="{{ spot_no if spot_no else '' }}"
                     required readonly>
                 <br>
                 <label for="status">Status: </label>
                 {% if status == 'O'%}
-                <a id="status" class='spot spot-occ' href="{{ url_for('O_spot',spot_id=spot_id) }}">O</a>
+                <a id="status" class='spot spot-occ' href="{{ url_for('O_spot',spot_id=spot_id) }}">O</a> (Click to see more details)
                 {% else %}
-                <a id="status" class='spot spot-avl' href="{{ url_for('O_spot',spot_id=spot_id) }}">A</a>
-
+                <a id="status" class='spot spot-avl'>A</a>
                 {% endif %}
-
                 <div class="buttons">
-                    <input class="button" type="submit" value="Delete">
                     <a class="button" href="/dashboard">Close</a>
                 </div>
             </form>
         </div>
     </div>
 </body>
-
 </html>

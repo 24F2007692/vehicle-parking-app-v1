@@ -1,11 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SmartParkr - Search Parking Lots</title>
+    <link rel="stylesheet" href="../static/css/user_summary.css">
+
 </head>
+
 <body>
-    
+    {% include 'admin_navbar.html' %}
+    {% block content %}{% endblock %}
+    <h1>SUMMARY</h1>
+    <div id="summary">
+        <div class="boxes">
+            <div class="box">
+                <p>Total registered users</p>
+                <p>{{ total_users if total_users else 0 }}</p>
+            </div>
+            <div class="box">
+                <p>Occupied spots(occupied/total)</p>
+                <p>{{ occupied_spots if occupied_spots else 0 }} / {{ total_spots if
+                    total_spots else 0 }}</p>
+            </div>
+            <div class="box">
+                <p>Available spots(Available/total)</p>
+                <p>{{ Available_spots if Available_spots else 0 }} / {{ total_spots if
+                    total_spots else 0 }}</p>
+            </div>
+            <div class="box">
+                <p>Revenue of this month</p>
+                <p>{{ revenue_this_month if revenue_this_month else 0 }}rs</p>
+            </div>
+            <div class="box">
+                <p>Total lots</p>
+                <p>{{ total_lots if total_lots else 0 }}</p>
+            </div>
+        </div>
+        <hr>
+        <div class="images">
+            <img src="../static/images/hist2.png" alt="">
+            <img src="../static/images/pie2.png" alt="">
+        </div>
+
+    </div>
+
 </body>
+
 </html>

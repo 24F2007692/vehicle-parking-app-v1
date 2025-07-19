@@ -8,11 +8,11 @@ body {
   height: 100vh;
 }
 
-#O_details {
+#addlot {
   display: flex;
   gap: 3px;
   padding: 41px;
-  max-width: 420px;
+  max-width: 401px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 40px;
   backdrop-filter: blur(10px);
@@ -65,6 +65,13 @@ h1 {
   display: flex;
 }
 
+
+.buttons {
+  display: flex;
+  justify-content: center;
+    gap: 22px;
+}
+
 .alert {
   position: fixed;
   top: 15px;
@@ -84,11 +91,5 @@ h1 {
   font-weight: 600;
   font-family: "Segoe UI", sans-serif;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-}
-
-.buttons {
-  display: flex;
-  gap: 7px;
-  justify-content: center;
-  margin-top: 17px;
+  z-index: 10000;
 }

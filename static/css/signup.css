@@ -68,8 +68,20 @@ h1 {
   text-align: center;
 }
 
-.alert{
-  background-color: red;
-  position: sticky;
-  top: 100px;
+.alert {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #8b0000;
+  border: 1px solid rgba(255, 0, 0, 0.4);
+  border-radius: 12px;
+  font-weight: 600;
+  font-family: "Segoe UI", sans-serif;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  padding: 12px 24px;
+  z-index: 999;
 }

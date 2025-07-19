@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SmartParkr - User Navigation</title>
     <link rel="stylesheet" href="../static/css/user_dashboard.css">
 </head>
 
@@ -12,45 +12,19 @@
     {% include 'user_navbar.html' %}
     {% block content %}{% endblock %}
 
-    {% if history %}
-    <h1>Recent parking history</h1>
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-
-                    <th>ID</th>
-                    <th>Location</th>
-                    <th>Vehicle No</th>
-                    <th>Parking time-stamp</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                {% for reservations in history %}
-                <tr>
-                    <td>{{ reservations[0] }}</td>
-                    <td>{{ reservations[1] }}</td>
-                    <td>{{ reservations[2] }}</td>
-                    <td>{{ reservations[3].strftime('%Y-%m-%d %I:%M %p') }}</td>
-                    {% if not reservations[4] %}
-                    <td><a class="clear-button" href="{{ url_for('release',res_id=reservations[0]) }}">release</a></td>
-                    {% else %}
-                    <td><button class="search-button">Parked out</button></td>
-                    {% endif %}
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert">{{ message }}</div>
+    {% endfor %}
     {% endif %}
-    <hr>
+    {% endwith %}
+
     <form action="{{ url_for('search_lot') }}" method="post">
         <div class="search-container">
             <label for="location">Search parking Location/Pincode: </label>
             <input class="search-input" type="text" id="location" name="location" required>
-            <input class="search-button" type="submit" value="Submit">
+            <input class="search-button" type="submit" value="Search">
     </form>
     {% if location %}
     <form action="{{ url_for('dashboard') }}" method="get" style="display:inline;">
@@ -62,7 +36,7 @@
 
     {% if location %}
     {% if lots %}
-    <div class="table-container">
+    <div class="table-container" id="search_details">
         <table>
             <thead>
                 <tr>
@@ -78,7 +52,7 @@
                     <td>{{ lot.id }}</td>
                     <td>{{ lot.address }}</td>
                     <td>{{ lot.available_lots }}</td>
-                    <td><a class="search-button" href="{{ url_for('book_spot',lot_id=lot.id,) }}">BOOK</a></td>
+                    <td><a class="search-button" href="{{ url_for('book_spot',lot_id=lot.id) }}">BOOK</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -89,6 +63,46 @@
     {% endif %}
     {% endif %}
 
+
+    {% if history %}
+    <h1>Recent parking history</h1>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+
+                    <th>ID</th>
+                    <th>Location</th>
+                    <th>Vehicle No</th>
+                    <th>Parking time-stamp</th>
+                    <th>Parking Release time</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for reservations in history %}
+                <tr>
+                    <td>{{ reservations[0] }}</td>
+                    <td>{{ reservations[1] }}</td>
+                    <td>{{ reservations[2] }}</td>
+                    <td>{{ reservations[3].strftime('%Y-%m-%d %I:%M %p') }}</td>
+                    <td>{{ reservations[4].strftime('%Y-%m-%d %I:%M %p') if reservations[4] else "Pending Release" }}
+                    </td>
+                    {% if not reservations[4] %}
+                    <td><a class="clear-button" href="{{ url_for('release',res_id=reservations[0]) }}">release</a></td>
+                    {% else %}
+                    <td><button class="search-button">Parked out</button></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <h3>No history</h3>
+    </div>
+    {% endif %}
+    <script src="../static/js/alert.js"></script>
 </body>
 
 </html>

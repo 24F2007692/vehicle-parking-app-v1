@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../static/css/admin.css">
+    <title>SmartParkr - Search Parking Lots</title>
+    <link rel="stylesheet" href="../static/css/admin_dashboard.css">
     <link rel="stylesheet" href="../static/css/admin_search.css">
 </head>
 
@@ -13,6 +13,15 @@
     <!-- NAVBAR -->
     {% include 'admin_navbar.html' %}
     {% block content %}{% endblock %}
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
     <form method="POST" action="{{ url_for('search')}}">
         <label for="search_by"></label>
         <div class="search-container">
@@ -65,7 +74,7 @@
     </div>
 
     {% endif %}
-
+    <script src="../static/js/alert.js"></script>
 </body>
 
 </html>

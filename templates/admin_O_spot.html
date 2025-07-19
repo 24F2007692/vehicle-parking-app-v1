@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../static/css/admin_O_park_details.css">
+    <title>SmartParkr - Occupied Parking Spot Details</title>
+    <link rel="stylesheet" href="../static/css/admin_O_spot.css">
 </head>
 
 <body>
@@ -14,7 +14,7 @@
         <div class="form">
             <form action="">
                 <label for="id">Price(Per hour): </label>
-                <input class="input" type="number" id="id" name="id" value="{{ O_spot.spot_id }}" required readonly>
+                <input class="input" type="text" id="id" name="id" value="{{ price_per_hr }} rs" required readonly>
                 <br>
                 <label for="customer_id">Customer ID: </label>
                 <input class="input" type="number" id="customer_id" name="customer_id" value="{{ O_spot.user_id }}" required readonly>
@@ -26,10 +26,12 @@
                 <input class="input" type="datetime-local" id="date" name="date"
                     value="{{ O_spot.booking_time.strftime('%Y-%m-%dT%H:%M') }}" required readonly>
                 <br>
+                 <label for="address">Address: </label>
+                <textarea class="input" name="address" id="address" name="address" readonly>{{ lot.address }}</textarea>
+                <br>
                 <label for="cost">Est. parking cost: </label>
                 <input class="input" type="number" id="id" name="id" value="{{ total_cost }}" required readonly>
                 <br>
-
                 <div class="buttons">
                     <a class="button" href="{{ url_for('dashboard') }}">Cancel</a>
                 </div>

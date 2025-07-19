@@ -61,11 +61,11 @@
         <p>SmartParkr</p>
         <ul class="center-nav">
             <li><a href="/dashboard">Home</a></li>
-            <li><a href="">Summary</a></li>
+            <li><a href="/usersummary">Summary</a></li>
             <li><a href="/logout">Logout</a></li>
         </ul>
         <div class="profile">
-            <a style="color: white; text-decoration: none;" href="#">EditProfile</a>
+            <a style="color: white; text-decoration: none;" href="{{url_for('editprofile')}}">{{ session['user_name'] }}</a>
             <img style="width: 23px;" src="../static/images/no-profile-picture-15257.png" alt="">
         </div>
     </nav>

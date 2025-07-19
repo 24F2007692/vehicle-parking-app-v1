@@ -4,23 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login page</title>
+    <title>SmartParkr - Login</title>
     <link rel="stylesheet" href="../static/css/login.css">
 </head>
 
 <body>
-
+    
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     {% for message in messages %}
-    <div class="alert" role="alert">
-        {{message}}
-    </div>
+    <div class="alert">{{ message }}</div>
     {% endfor %}
     {% endif %}
     {% endwith %}
-
-
     <div id="login">
         <h1>Login</h1>
         <div class="login-div">
@@ -34,12 +30,14 @@
 
                 <input class="button" type="submit" value="Login">
                 <br>
-                <p class="signup">Don't have an account?<a style="text-decoration: none;color: black; font-weight: bold;" href="/signup">Register</a></p>
+                <p class="signup">Don't have an account?<a
+                        style="text-decoration: none;color: black; font-weight: bold;" href="/signup">Register</a></p>
 
         </div>
         </form>
     </div>
     </div>
+    <script src="../static/js/alert.js"></script>
 </body>
 
 </html>

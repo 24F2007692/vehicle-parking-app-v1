@@ -8,22 +8,22 @@ body {
   height: 100vh;
 }
 
-#addlot {
+#signup {
   display: flex;
-  gap: 3px;
-  padding: 41px;
-  max-width: 401px;
+  gap: 10px;
+  padding: 42px;
+  max-width: 391px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 40px;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  align-items: center;
-  height: 488px;
-  justify-content: center;
-  flex-direction: column;
+  height: 478px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .button {
@@ -61,20 +61,19 @@ h1 {
   font-weight: 1000;
 }
 
-.form {
+.signup {
   display: flex;
+}
+
+.login {
+  text-align: center;
 }
 
 .alert {
   position: fixed;
-  top: 15px;
-  text-align: center;
-  margin-top: 20px;
-  margin-bottom: -60px;
-  padding: 12px 24px;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
   background: rgba(255, 0, 0, 0.2);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -84,6 +83,8 @@ h1 {
   font-weight: 600;
   font-family: "Segoe UI", sans-serif;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  padding: 12px 24px;
+  z-index: 999;
 }
 
 .buttons {

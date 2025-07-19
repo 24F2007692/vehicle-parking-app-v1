@@ -4,13 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SmartParkr - User Summary</title>
+    <link rel="stylesheet" href="../static/css/user_summary.css">
 </head>
 
 <body>
     {% include 'user_navbar.html' %}
     {% block content %}{% endblock %}
-    <h1>Summary on already used parking spots</h1>
+    <h1>SUMMARY</h1>
+    <div id="summary">
+        <div class="boxes">
+            <div class="box">
+                <p>Average Parking Duration</p>
+                <p>{{ formatted_avg_duration if formatted_avg_duration else "no bookings done yet" }}</p>
+            </div>
+            <div class="box">
+                <p>Total Amount Spent</p>
+                <p>{{ total_amount_spent if total_amount_spent else 0 }}</p>
+            </div>
+            <div class="box">
+                <p>Total Bookings</p>
+                <p>{{ total_bookings if total_bookings else 0 }} bookings</p>
+            </div>
+            <div class="box">
+                <p>Active Bookings</p>
+                <p>{{ active_bookings if active_bookings else 0 }} Active</p>
+            </div>
+        </div>
+        <hr>
+        <div class="images">
+            <img src="../static/images/hist1.png" alt="">
+            <img src="../static/images/pie1.png" alt="">
+        </div>
+    </div>
+
 </body>
 
 </html>

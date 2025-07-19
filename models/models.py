@@ -1,7 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 from app import app
-from datetime import datetime, timezone
 from werkzeug.security import generate_password_hash,check_password_hash
+from datetime import datetime,timezone,timedelta
+
 
 db = SQLAlchemy(app)
 
@@ -21,7 +22,7 @@ class User(db.Model):
 
     @password.setter
     def password(self,password):
-        self.passhash= generate_password_hash(password)
+        self.passhash = generate_password_hash(password)
 
     def chk_pass(self,password):
         return check_password_hash(self.passhash,password)
@@ -46,11 +47,17 @@ class ParkingSpot(db.Model):
 
     reservations = db.relationship('Reservation',backref='spot')
 
+IST = timezone(timedelta(hours=5, minutes=30))
+
+
 class Reservation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    spot_id = db.Column(db.Integer, db.ForeignKey('parking_spot.id'), nullable=False)
+    spot_id = db.Column(db.Integer, db.ForeignKey('parking_spot.id', ondelete='SET NULL'), nullable=True)
+    spot_id_copy = db.Column(db.Integer)
+    address = db.Column(db.String(200),nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    booking_time = db.Column(db.DateTime, default = datetime.now(timezone.utc))
+    
+    booking_time = db.Column(db.DateTime, default=lambda: datetime.now(IST))
     Leaving_timestamp = db.Column(db.DateTime)
     parking_cost  = db.Column(db.Float)
     vehicle_num=db.Column(db.String(15))
@@ -58,11 +65,8 @@ class Reservation(db.Model):
     user = db.relationship('User', backref='reservations')
 
 
-
 with app.app_context():
     db.create_all()
-    
-    #add admin if admin does't exist
     admin = User.query.filter_by(role='admin').first()
     if not admin:
         admin = User(email='admin@gmail.com',password='admin',name='admin',address='unknown',pincode='unknown',role='admin')

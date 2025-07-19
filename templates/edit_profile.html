@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartParkr - Edit Profile</title>
+    <link rel="stylesheet" href="../static/css/editprofile.css">
+</head>
+
+<body>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div id="signup">
+        <h1>Edit Profile</h1>
+        <div class="signup-div">
+            <form method="post">
+                <label for="mail">Email id(Username): </label>
+                <input class="input" type="email" id="mail" name="mail" value="{{ user.email }}" required readonly>
+                <br>
+                <label for="name">Fullname: </label>
+                <input class="input" type="text" id="name" name="name" value="{{ user.name }}" required>
+                <br>
+                <label for="address">Address: </label>
+                <textarea class="input" name="address" id="address" name="address"
+                    required>{{ user.address }}</textarea>
+                <br>
+                <label for="pincode">Pincode: </label>
+                <input class="input" type="number" id="pincode" name="pincode" value="{{ user.pincode }}" required>
+                <br>
+                <label for="O_pass">Enter old Password: </label>
+                <input class="input" type="password" id="O_pass" name="O_pass" required>
+                <br>
+                <label for="N_pass">Enter new Password: </label>
+                <input class="input" type="password" id="N_pass" name="N_pass"
+                    placeholder="enter new pass if wants to edit">
+                <br>
+                <div class="buttons">
+                    <input class="button" type="submit" value="Submit">
+                    <a class="button" href="{{ url_for('dashboard') }}">Cancel</a>
+                </div>
+        </div>
+        </form>
+    </div>
+    <script src="../static/js/alert.js"></script>
+</body>
+
+</html>

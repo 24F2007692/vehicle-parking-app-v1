@@ -4,14 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../static/css/admin.css">
+    <title>SmartParkr - Admin Dashboard</title>
+    <link rel="stylesheet" href="../static/css/admin_dashboard.css">
 </head>
 
 <body>
     {% include 'admin_navbar.html' %}
     {% block content %}{% endblock %}
+
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+
     <h1>All Parking Lots</h1>
+    {% if lots | length > 0 %}
     <div class="parkinglots">
         {% for lot in lots %}
         <div class="lot">
@@ -29,7 +41,8 @@
                 {% for spot in spots %}
                 {% if lot.id == spot.lot_id %}
                 <div class="spot">
-                    <a class="{{'spot-avl' if spot.status=='A' else 'spot-occ'}}" href="{{ url_for('view_spot',spot_id=spot.id) }}">{{ spot.status }}</a>
+                    <a class="{{'spot-avl' if spot.status=='A' else 'spot-occ'}}"
+                        href="{{ url_for('view_spot',spot_id=spot.id) }}">{{ spot.status }}</a>
                 </div>
                 {% endif %}
                 {% endfor %}
@@ -37,7 +50,11 @@
         </div>
         {% endfor %}
     </div>
+    {% else %}
+    <h4>No lots Right Now</h4>
+    {% endif %}
     <a class="addlot" href="/addlot">+AddLot</a>
+    <script src="../static/js/alert.js"></script>
 </body>
 
 </html>
