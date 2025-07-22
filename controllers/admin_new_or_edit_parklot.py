@@ -25,6 +25,11 @@ def edit_lot(lot_id):
             return redirect(url_for('dashboard'))
 
 
+        fields = (lot.prime_location_name != request.form.get('location') or
+                lot.price_per_hr != request.form.get('price') or
+                lot.address != request.form.get('address') or
+                lot.pincode != request.form.get('pincode'))
+        
         lot.prime_location_name = request.form.get('location')
         lot.price_per_hr = request.form.get('price')
         lot.address = request.form.get('address')
@@ -56,7 +61,11 @@ def edit_lot(lot_id):
 
 
         else:
-            flash("No changes detected")
-            return redirect(url_for('dashboard'))
+            if fields:
+                db.session.commit()
+                flash("Lot updated successfully")
+            else:
+                flash("No changes detected")
+                return redirect(url_for('dashboard'))
 
     return render_template("admin_new_or_edit_parklot.html", lot=lot)
