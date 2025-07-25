@@ -104,8 +104,5 @@ The project is organized into a modular structure to keep the code clean and mai
 - **Charts**: Generated with Matplotlib, saved in `static/images/`.
 
 ## License
-Add your license here.
-
----
-
+OPEN
 **For any issues or contributions, please open an issue or pull request.**
